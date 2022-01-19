@@ -1,0 +1,32 @@
+Results for file
+--> scan_for_lexical.java
+
+Target File Path
+--> Your File Path
+
+Number of Tokens
+--> 56
+
+Identifiers
+--> 16
+
+Keywords
+--> 7
+
+Operators
+--> 10
+
+Delimiters
+--> 18
+
+Characters
+--> 4
+
+Strings
+--> 1
+
+Comments
+--> 8
+
+Lines
+--> 12
