@@ -298,7 +298,7 @@ class LexcialAnalyser {
             lastCharacter = character;
         }
 
-        if (!(token.isEmpty() && isCharacter && isString && isComment))
+        if (!token.isEmpty() && !(isCharacter || isString || isComment))
             setOutputOnToken(token);
 
         return this;
