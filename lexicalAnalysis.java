@@ -23,7 +23,7 @@ class lexicalAnalysis {
             if (args.length == 0) {
                 System.out.println("\n> No Input File Specified");
                 System.out.println("\n> Scanning for file name \"scan_for_lexical.java\" on path "
-                        + System.getProperty("user.home") + "--> Desktop");
+                        + System.getProperty("user.home") + " --> Desktop");
 
                 filePath = System.getProperty("user.home") + "/Desktop/scan_for_lexical.java";
                 analyser = new LexcialAnalyser(filePath);
@@ -45,11 +45,13 @@ class lexicalAnalysis {
 
                 try {
                     System.out.println("\n> Checking for file \"lexical_analysis_output.txt\" on path "
-                            + System.getProperty("user.home") + "--> Desktop");
+                            + System.getProperty("user.home") + " --> Desktop");
                     file = new File(System.getProperty("user.home") + "/Desktop/lexical_analysis_output.txt");
 
-                    if (!file.canWrite())
-                        throw new FileNotFoundException("File is not writable or unavailable");
+                    if (!file.canWrite()) {
+                        if (!(new File(System.getProperty("user.home") + "/Desktop").exists()))
+                            throw new FileNotFoundException("File is not writable or unavailable");
+                    }
 
                 } catch (Exception e) {
                     file = new File(
@@ -256,9 +258,6 @@ class LexcialAnalyser {
                                 token += character;
                                 break;
                             }
-
-                            output.increaseOperator().increaseToken();
-                            token = "" + character;
                         }
 
                         output.increaseOperator().increaseToken();
@@ -289,11 +288,19 @@ class LexcialAnalyser {
                     break;
 
                 default:
+                    if (wasOperator) {
+                        unmarkOperator();
+                        token = "";
+                    }
                     token += character;
 
             }
             lastCharacter = character;
         }
+
+        if (!token.isEmpty())
+            setOutputOnToken(token);
+
         return this;
     }
 
@@ -526,7 +533,7 @@ class LexicalOutput {
 
 class JavaSyntax {
     private String keywords = "abstract continue for new switch assert default package synchronized boolean do if private this break double implements protected throw byte else import public throws case enum instanceof return transient catch extends int short try char final interface static void class finally long strictfp volatile float native super while";
-    private String operators = "= + - * / % ++ -- ! == != > >= < <= && || ~ << >> >>> & ^ |";
+    private String operators = "= + - * / % ++ -- ! == != > >= < <= && || ~ << >> >>> & ^ | += -=";
     private String delimiters = "( ) { } [ ] ; , . :";
     private String commentsDelimiters = "// /* */";
     private String stringLiterals = "\"";
