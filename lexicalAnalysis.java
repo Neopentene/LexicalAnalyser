@@ -23,9 +23,9 @@ class lexicalAnalysis {
             if (args.length == 0) {
                 System.out.println("\n> No Input File Specified");
                 System.out.println("\n> Scanning for file name \"scan_for_lexical.java\" on path "
-                        + System.getProperty("user.home") + "\\Desktop");
+                        + System.getProperty("user.home") + "--> Desktop");
 
-                filePath = System.getProperty("user.home") + "\\Desktop\\scan_for_lexical.java";
+                filePath = System.getProperty("user.home") + "/Desktop/scan_for_lexical.java";
                 analyser = new LexcialAnalyser(filePath);
 
             } else {
@@ -45,22 +45,22 @@ class lexicalAnalysis {
 
                 try {
                     System.out.println("\n> Checking for file \"lexical_analysis_output.txt\" on path "
-                            + System.getProperty("user.home") + "\\Desktop");
-                    file = new File(System.getProperty("user.home") + "\\Desktop\\lexical_analysis_output.txt");
+                            + System.getProperty("user.home") + "--> Desktop");
+                    file = new File(System.getProperty("user.home") + "/Desktop/lexical_analysis_output.txt");
 
                     if (!file.canWrite())
                         throw new FileNotFoundException("File is not writable or unavailable");
 
                 } catch (Exception e) {
                     file = new File(
-                            System.getProperty("user.home") + "\\Lexical Output");
+                            System.getProperty("user.home") + "/Lexical Output");
 
                     if (file.mkdirs() || file.canWrite()) {
                         System.out.println("> Directory Creation Successful");
                         System.out.println(
                                 "> Output will be stored in Folder Lexical Output on path "
                                         + System.getProperty("user.home"));
-                        file = new File(file.getPath() + "\\lexical_analysis_output.txt");
+                        file = new File(file.getPath() + "/lexical_analysis_output.txt");
                     } else {
                         System.out.println("> Failed to create a default directory");
                         System.out.println("> Since no output file is available, the output will not be stored");
